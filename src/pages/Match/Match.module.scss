@@ -1,0 +1,252 @@
+.container {
+  padding: 0 15px;
+}
+
+.header {
+  padding: 30px 0;
+  margin-bottom: 10px;
+
+  .title {
+    position: relative;
+    margin-right: 90px;
+    margin-left: 10px;
+    font-size: 2rem;
+
+    h2 {
+      margin-left: 10px;
+    }
+
+    &::before {
+      content: "";
+      width: 3px;
+      height: 28px;
+      background: #25ff70;
+      position: absolute;
+      bottom: 9px;
+      left: -10px;
+    }
+  }
+}
+
+.detail {
+  background-color: var(--background-box);
+  .item {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px;
+    .team-home,
+    .team-away {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+
+.team-logo {
+  width: 80px;
+  .image {
+    width: 100%;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+.team-name {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  &:hover {
+    cursor: pointer;
+    color: var(--green-color);
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .league {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+
+    .league-name {
+      margin-left: 30px;
+      font-size: 1.5rem;
+    }
+    .image-league {
+      width: 40px;
+      height: 40px;
+      .img-league {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .result {
+    display: flex;
+    align-items: center;
+    font-size: 6rem;
+    font-weight: 600;
+    line-height: 7rem;
+    div {
+      margin: 0 14px;
+    }
+  }
+}
+
+.content {
+  background-color: #121315;
+  .content-wrap {
+    padding: 2px 16px;
+    .live-full {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.lf-left {
+  flex: 0 0 75%;
+  max-width: 75%;
+  .btn-links {
+    margin: 20px 0;
+    .button {
+      border-radius: 4px;
+    }
+  }
+  .screen {
+    height: 500px;
+    background-color: var(--black-color);
+  }
+}
+
+.lf-right {
+  flex: 0 0 25%;
+  max-width: 25%;
+  .btn-chat {
+    display: flex;
+    justify-content: end;
+    margin: 20px 0;
+  }
+  .chat-box {
+    height: 500px;
+    background-color: aliceblue;
+  }
+}
+
+.lf-bottom {
+  margin: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  .bottom-btn {
+    display: flex;
+    .btb-btn {
+      display: flex;
+      align-items: center;
+      margin-right: 40px;
+      font-size: 1.6rem;
+      cursor: pointer;
+
+      &:hover .icon-phone,
+      &:hover .icon-ratio,
+      &:hover .icon-scrutiny {
+        scale: 1.1;
+      }
+      .icon-phone {
+        margin-right: 10px;
+        padding: 6px 12px;
+        text-align: center;
+        border-radius: 50%;
+        color: var(--black-color);
+        font-size: 1.6rem;
+        background-image: linear-gradient(45deg, #ffb658 0, #f2f057 100%);
+      }
+      .icon-ratio {
+        margin-right: 10px;
+        padding: 6px 12px;
+        text-align: center;
+        border-radius: 50%;
+        color: var(--black-color);
+        font-size: 1.6rem;
+        background-image: linear-gradient(
+          45deg,
+          #45d4fb 0,
+          #57e9f2 48%,
+          #9efbd3 100%
+        );
+      }
+      .icon-scrutiny {
+        margin-right: 10px;
+        padding: 6px 12px;
+        text-align: center;
+        border-radius: 50%;
+        color: var(--black-color);
+        font-size: 1.6rem;
+        background-image: linear-gradient(45deg, #96e6a1 0, #d4fc79 100%);
+      }
+    }
+  }
+}
+
+.sidebar {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px -10px;
+  .sidebar-wrap {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 10px;
+    .sidebar-info {
+      padding: 16px;
+      background-color: var(--background-box);
+      font-size: 1.6rem;
+      div {
+        margin: 10px 0;
+      }
+    }
+    .sidebar-logo-match {
+      width: 100%;
+      height: 100px;
+      display: flex;
+      margin-top: 50px;
+      justify-content: space-evenly;
+      align-items: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      .sideber-img {
+        width: 100px;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  .bookmaker {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 10px;
+    .title {
+      position: relative;
+      margin: 0 90px 14px 10px;
+      font-size: 2rem;
+
+      h2 {
+        margin-left: 10px;
+      }
+
+      &::before {
+        content: "";
+        width: 3px;
+        height: 28px;
+        background: #25ff70;
+        position: absolute;
+        bottom: 9px;
+        left: -10px;
+      }
+    }
+  }
+}

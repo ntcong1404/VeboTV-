@@ -1,0 +1,59 @@
+.wrapper {
+  padding: 15px;
+}
+
+.header {
+  margin-top: 40px;
+  .title {
+    position: relative;
+    margin-right: 90px;
+    margin-left: 10px;
+    font-size: 1.6rem;
+    padding: 14px 0;
+
+    h2 {
+      margin-left: 10px;
+    }
+
+    &::before {
+      content: "";
+      width: 3px;
+      height: 28px;
+      background: #25ff70;
+      position: absolute;
+      bottom: 20px;
+      left: -10px;
+    }
+  }
+
+  .desc {
+    background-color: #8f6fd7;
+    padding: 20px;
+    margin: 4px 0;
+  }
+}
+
+.main {
+}
+.date {
+}
+.date-list {
+  display: flex;
+  padding: 12px 7px;
+  font-size: 1.5rem;
+  font-weight: 550;
+  background-color: #121315;
+  .date-item {
+    background-color: #2f3137;
+    border-radius: 8px;
+    padding: 4px 10px;
+    margin-left: 14px;
+    &:hover {
+      color: var(--green-color);
+      cursor: pointer;
+    }
+    &.active {
+      color: var(--green-color);
+    }
+  }
+}

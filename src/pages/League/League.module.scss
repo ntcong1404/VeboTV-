@@ -1,0 +1,151 @@
+.container {
+  padding: 20px 15px;
+}
+
+.title {
+  position: relative;
+  margin-right: 90px;
+  margin-left: 10px;
+  font-size: 2rem;
+  text-transform: uppercase;
+  h2 {
+    margin-left: 10px;
+  }
+
+  &::before {
+    content: "";
+    width: 3px;
+    height: 28px;
+    background: #25ff70;
+    position: absolute;
+    bottom: 9px;
+    left: -10px;
+  }
+}
+
+.sidebar {
+  background: #121315;
+  margin: 20px 0 0 0;
+  .banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 40px;
+    .banner-logo {
+      width: 100px;
+      height: 100px;
+      margin-right: 40px;
+      .logo-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+    .banner-text {
+      display: flex;
+      flex-direction: column;
+      margin-left: 30px;
+      z-index: 2;
+      .country {
+        font-size: 2rem;
+        font-weight: 500;
+      }
+      .name {
+        font-size: 3rem;
+        font-weight: 700;
+      }
+    }
+
+    .cover {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 70%;
+      height: 100%;
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        background: linear-gradient(90deg, #121315 0, rgba(18, 19, 21, 0) 100%);
+        z-index: 1;
+      }
+      .cover-img {
+        background-image: url("../../assets/images/cover-championleague.jpg");
+        position: absolute;
+        opacity: 1;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        background-size: cover;
+        background-position: center center;
+      }
+    }
+  }
+  .nav-list {
+    display: flex;
+    align-items: center;
+    padding: 4px 40px;
+    .nav-item {
+      position: relative;
+      margin-right: 50px;
+      font-size: 1.4rem;
+      font-weight: 600;
+      padding: 10px 10px;
+      &:hover {
+        cursor: pointer;
+        color: var(--green-color);
+      }
+
+      &.active {
+        color: var(--green-color);
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: 0px;
+          left: 21%;
+          height: 3px;
+          width: 60px;
+          background-color: var(--green-color);
+        }
+      }
+    }
+  }
+}
+
+.content {
+  display: flex;
+
+  background-color: #25272d;
+  padding: 20px;
+}
+
+.match-featured {
+  flex: 0 0 66.66667%;
+  max-width: 66.66667%;
+  .mf-header {
+    padding: 6px 30px;
+    font-size: 2rem;
+    font-weight: 600;
+    .mfh-icon {
+      margin-right: 20px;
+      color: var(--green-color);
+    }
+  }
+  .mf-content {
+    display: flex;
+    flex-wrap: wrap;
+    .mf-item {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+}
+.ads {
+  flex: 0 0 33.33333%;
+  max-width: 33.33333%;
+}

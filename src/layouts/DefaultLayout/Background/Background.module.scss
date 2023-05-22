@@ -1,0 +1,11 @@
+.background {
+  position: absolute;
+  top: calc(0px - var(--header-height));
+  left: 0;
+  z-index: -10;
+  background-size: cover;
+}
+.background-image {
+  height: auto;
+  width: 100%;
+}

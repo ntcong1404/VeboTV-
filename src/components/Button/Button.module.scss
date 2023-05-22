@@ -1,0 +1,129 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 70px;
+  padding: 0 10px;
+  border-radius: 4px;
+  font-family: var(--font-family);
+  cursor: pointer;
+  color: var(--black-color);
+  background-color: var(--white-color);
+  text-decoration: none;
+  user-select: none;
+
+  + .wrapper {
+    margin-left: 8px;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.icon + .title,
+.title + .icon {
+  margin-left: 8px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}
+
+// Button types
+.rounded {
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+  border-color: rgba(22, 24, 35, 0.12);
+
+  &:hover {
+    border-color: rgba(22, 24, 35, 0.2);
+    background-color: rgba(22, 24, 35, 0.03);
+  }
+}
+
+.primary {
+  color: var(--black-color);
+  border-color: transparent;
+  background-color: var(--goldBtn-color);
+  border-radius: 8px;
+
+  &:hover {
+    background-color: #ffe408;
+  }
+}
+
+.user {
+  box-shadow: none;
+  border-color: transparent;
+  background: #40434b;
+  &:hover {
+    background-color: #646871;
+  }
+}
+
+.live {
+  color: var(--white-color);
+  border-color: transparent;
+  background-color: var(--gray-live-color);
+  border-radius: 8px;
+
+  &:hover {
+    background-color: #80838dd2;
+  }
+}
+
+.bet {
+  color: var(--black-color);
+  background-color: var(--green-color);
+  border-color: transparent;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(37, 255, 112, 0.3);
+
+  &:hover {
+    box-shadow: 0 0 25px rgba(37, 255, 112, 0.3);
+  }
+}
+
+.outline {
+  color: var(--primary);
+  border-color: currentColor;
+
+  &:hover {
+    border-color: currentColor;
+    background-color: rgba(254, 44, 85, 0.06);
+  }
+}
+
+.text {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Disabled
+
+// Button sizes
+.xsmall {
+  height: 40px;
+  min-width: 40px;
+  padding: 0 1rem;
+}
+
+.small {
+  min-width: 72px;
+  height: 34px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 8px 12px;
+}
+
+.large {
+  min-width: 104px;
+  height: 40px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding: 0 16px;
+}

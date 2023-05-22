@@ -1,0 +1,172 @@
+.wrapper {
+  min-height: calc(100vh - 300px);
+  max-width: 1360px;
+  width: 100%;
+}
+
+.container {
+  max-width: 700px;
+  margin: 120px auto;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.header {
+  background-color: var(--black-color);
+  padding: 12px;
+  h2 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    padding: 16px 20px 8px;
+  }
+  .navbar {
+    padding: 16px 20px 8px;
+    font-size: 1.5rem;
+    display: flex;
+    .nav-item {
+      position: relative;
+      color: var(--green-color);
+      padding: 0 20px;
+      margin-right: 20px;
+      &.active::before {
+        content: "";
+        width: 40px;
+        height: 3px;
+        background: #25ff70;
+        position: absolute;
+        bottom: -20px;
+        left: 28%;
+      }
+    }
+  }
+}
+
+.body {
+  display: flex;
+  justify-content: space-between;
+  padding: 32px;
+  background-color: var(--background-content-left);
+}
+
+.input-group {
+  flex: 1;
+  margin-right: 20px;
+  padding-right: 20px;
+  color: #96979a;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  label {
+    padding: 0 0 12px 0;
+  }
+  .edit-name {
+    border-radius: 4px;
+  }
+  .btn-edit {
+    position: relative;
+    cursor: pointer;
+
+    .icon {
+      position: absolute;
+      top: -44px;
+      right: 0;
+      border-bottom-right-radius: 4px;
+      border-top-right-radius: 4px;
+      background: #3d3f43;
+      font-size: 1.5rem;
+      padding: 14px 14px 15px 14px;
+    }
+
+    .btn-success {
+      position: absolute;
+      top: -44px;
+      right: 0;
+      color: var(--green-color);
+      font-size: 1.6rem;
+      padding: 14px;
+      border-bottom-right-radius: 4px;
+      border-top-right-radius: 4px;
+      background-color: #3d3f43;
+    }
+    .btn-cancel {
+      color: #888;
+      position: absolute;
+      top: -44px;
+      right: 42px;
+      font-size: 1.6rem;
+      padding: 14px;
+    }
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .edit-pass {
+    background-color: #212226;
+    height: 43px;
+    border-radius: 4px;
+    padding: 14px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    .icon {
+      margin-right: 6px;
+    }
+    .title {
+      margin-left: 6px;
+    }
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+.input-control {
+  width: 100%;
+  position: relative;
+  padding: 14px 20px;
+  border-radius: 4px;
+  border-color: transparent;
+  border: none;
+  outline: none;
+  background-color: #212226;
+  color: #ccc;
+  font-size: 1.4rem;
+  font-weight: 530;
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #27292e;
+  }
+}
+
+.avatar {
+  width: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin-top: 24px;
+  align-items: center;
+
+  .avatar-gr {
+    cursor: pointer;
+    text-align: center;
+    .image {
+      border-radius: 50%;
+      width: 120px;
+      object-fit: cover;
+    }
+
+    .title {
+      margin-top: 10px;
+    }
+  }
+}
+
+// modalPass

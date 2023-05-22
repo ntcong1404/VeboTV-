@@ -1,0 +1,66 @@
+.bookmaker-item {
+  display: flex;
+  align-items: center;
+  min-height: 130px;
+  padding: 18px;
+  background-color: var(--background-main);
+  margin-bottom: 1px;
+  &:hover {
+    background-color: var(--background-box);
+  }
+  &.small {
+    display: flex;
+    min-height: 130px;
+
+    .title {
+      display: flex;
+      .name {
+        margin-bottom: 0;
+      }
+    }
+    .info-bookmaker {
+      display: flex;
+      flex: 0 0 70%;
+      max-width: 70%;
+    }
+  }
+}
+.info-bookmaker {
+  display: flex;
+  flex: 0 0 83.33333%;
+  max-width: 83.33333%;
+}
+.bookmaker-img {
+  width: 100px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 26px;
+}
+.name {
+  font-size: 1.8rem;
+  line-height: 2rem;
+  font-weight: 530;
+  color: var(--text-color);
+  margin-bottom: 12px;
+}
+.decs {
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+  color: #8e8f92;
+}
+.bookmaker-btn {
+  flex: 0 0 16.66667%;
+  max-width: 16.66667%;
+  padding: 10px;
+  font-size: 1.3rem;
+  text-align: center;
+  &:hover {
+    box-shadow: 0 0 25px rgba(37, 255, 112, 0.3);
+  }
+}
