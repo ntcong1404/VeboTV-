@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,26 +11,28 @@ import * as Service from "../../apiService/Service";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const cx = classNames.bind(styles);
-
+// bug call api nhung khong active nav
 function News() {
+  const navigate = useNavigate();
   const [news, setNews] = useState([]);
-  const [changePage, setChangePage] = useState(1);
+  const [page, setPage] = useState(1);
 
   const handlePageClick = (data) => {
-    setChangePage(data.selected + 1);
+    setPage(data.selected + 1);
+    navigate(`/news/page/${data.selected + 1}`);
   };
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, [changePage]);
+  }, [page]);
 
   useEffect(() => {
-    Service.NewsPage({ page: changePage })
+    Service.NewsPage({ page: page })
       .then((data) => {
         setNews(data);
       })
       .catch((error) => console.log(error));
-  }, [changePage]);
+  }, [page]);
 
   return (
     <div className={cx("wrapper")}>

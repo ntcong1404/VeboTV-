@@ -115,13 +115,9 @@ export const MatchLive = async ({ id }) => {
   }
 };
 
-export const MatchLiveMeta = async ({ id, link }) => {
+export const MatchLiveMeta = async ({ id }) => {
   try {
-    const res = await request.get(`match/${id}/meta`, {
-      params: {
-        link,
-      },
-    });
+    const res = await request.get(`match/${id}/meta`);
     return res.data;
   } catch (error) {
     console.log(error);

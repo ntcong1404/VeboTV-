@@ -26,7 +26,7 @@ const date = [
   {
     date:
       dayjs().date(dayjs().date() - 3).$D +
-      "/" +
+      "-" +
       month[dayjs().date(dayjs().date() - 3).$M],
     to:
       dayjs().date(dayjs().date()).$y +
@@ -36,7 +36,7 @@ const date = [
   {
     date:
       dayjs().date(dayjs().date() - 2).$D +
-      "/" +
+      "-" +
       month[dayjs().date(dayjs().date() - 2).$M],
     to:
       dayjs().date(dayjs().date()).$y +
@@ -46,7 +46,7 @@ const date = [
   {
     date:
       dayjs().date(dayjs().date() - 1).$D +
-      "/" +
+      "-" +
       month[dayjs().date(dayjs().date() - 1).$M],
     to:
       dayjs().date(dayjs().date()).$y +
@@ -91,7 +91,7 @@ function Result() {
         <div className={cx("title")}>
           <h2>
             KẾT QUẢ BÓNG ĐÁ{" "}
-            {dayjs().date() + "/" + month[dayjs().date(dayjs().date()).$M]} MỚI
+            {dayjs().date() + "-" + month[dayjs().date(dayjs().date()).$M]} MỚI
             NHẤT
           </h2>
         </div>

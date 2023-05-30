@@ -42,12 +42,27 @@
   font-size: 1.5rem;
   margin: 10px 0 30px 0;
 }
+
+.noti-err {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  .err-message {
+    border: 2px solid red;
+    border-radius: 6px;
+    font-size: 1.7rem;
+    font-weight: 600;
+    padding: 10px 20px;
+    color: red;
+  }
+}
 .register-form {
   display: flex;
   flex-direction: column;
 
   input {
-    height: 50px;
+    height: 46px;
     padding: 12px 20px;
     margin: 10px 0;
     color: var(--black-color);
@@ -58,18 +73,11 @@
     border-radius: 4px;
     background: var(--white-color);
   }
-}
-.checkbox {
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-  input {
-    margin-right: 16px;
+  p {
+    color: rgba($color: #fc0000, $alpha: 0.9);
   }
 }
 
-.capcha {
-}
 .btn {
   width: 100%;
   height: 46px;
@@ -77,12 +85,23 @@
   font-weight: 550;
   background-color: var(--green-color);
   text-align: center;
-  margin-top: 10px;
+  margin-top: 40px;
   text-decoration: none;
   cursor: pointer;
 
   &:hover {
     background-color: rgba(37, 255, 113);
     filter: brightness(1.1);
+  }
+}
+
+.togglePass {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  input {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
   }
 }

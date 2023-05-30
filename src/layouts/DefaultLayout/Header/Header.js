@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
-import Modal from "react-modal";
 import classNames from "classnames/bind";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Tippy from "@tippyjs/react/headless";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
-  faArrowRight,
   faChevronDown,
-  faClose,
   faFutbolBall,
   faRightFromBracket,
-  faSpinner,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import { getAuth, signOut } from "firebase/auth";
 
 import * as Service from "../../../apiService/Service";
 import images from "../../../assets/images";
@@ -20,7 +19,8 @@ import Image from "../../../components/Image";
 import styles from "./Header.module.scss";
 import config from "../../../config";
 import Button from "../../../components/Button";
-// import Modal from "./Modal";
+import ModalLogin from "./ModalLogin";
+import "../../../firebase/firebase";
 
 const cx = classNames.bind(styles);
 
@@ -41,16 +41,29 @@ const userMenu = [
 function Header() {
   const navigate = useNavigate();
 
-  const [mailValue, setMailValue] = useState("");
-  const [passValue, setPassValue] = useState("");
-
-  const [currentUser, setCurrentUser] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
   const [leagues, setLeagues] = useState([]);
 
+  const auth = getAuth();
+
+  // handle firebase auth change
+  useEffect(() => {
+    const unregisterAuthObserver = auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        console.log("user is not registered");
+        return;
+      }
+
+      const token = await user.getIdToken();
+      console.log(token);
+      setCurrentUser(!!user);
+    });
+    return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
+  }, [auth]);
+
   // loading cho button dang nhap
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     Service.Leagues()
@@ -89,7 +102,7 @@ function Header() {
           to={item.to}
           onClick={() => {
             if (item.logOut === true) {
-              setCurrentUser(false);
+              return handleLogOut();
             }
           }}
         >
@@ -100,76 +113,24 @@ function Header() {
     </div>
   );
 
-  const handleChangeEmail = (e) => {
-    const valueMail = e.target.value;
-    if (!valueMail.startswith(" ")) {
-      setMailValue(valueMail);
-    }
-  };
-  const handleChangePass = (e) => {
-    const valuePass = e.target.value;
-    if (!valuePass.startswith(" ")) {
-      setPassValue(valuePass);
-    }
-  };
-
-  const handleLogIn = () => {
-    setCurrentUser(!currentUser);
-    setShowModal(!showModal);
+  const handleLogOut = () => {
+    signOut(auth)
+      .then(() => {
+        setCurrentUser(null);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <header className={cx("wrapper")}>
-      <Modal
-        isOpen={showModal}
-        onRequestClose={() => setShowModal(!showModal)}
-        ariaHideApp={false}
-        overlayClassName={cx("overlay")}
-        className={cx("modal")}
-      >
-        <div className={cx("close")} onClick={() => setShowModal(!showModal)}>
-          <FontAwesomeIcon className={cx("icon-close")} icon={faClose} />
-        </div>
-        <div className={cx("title")}>
-          <h2>Chào huynh đài</h2>
-          <p>
-            Huynh đài cần đăng nhập để tham gia bình luận và sử dụng các tính
-            năng nâng cao nhé.
-          </p>
-        </div>
-        <div className={cx("form-box")}>
-          <div className={cx("input-box")}>
-            <input
-              value={mailValue}
-              onChange={handleChangeEmail}
-              type="email"
-              placeholder="Email..."
-            />
-          </div>
-          <div className={cx("input-box")}>
-            <input
-              value={passValue}
-              onChange={handleChangePass}
-              type="password"
-              placeholder="Password..."
-            />
-          </div>
-          <Button text className={cx("btn", "login")} onClick={handleLogIn}>
-            Đăng nhập
-            {loading && (
-              <FontAwesomeIcon className={cx("loading")} icon={faSpinner} />
-            )}
-          </Button>
-          <Button
-            text
-            className={cx("btn", "register")}
-            to={config.routes.register}
-            rightIcon={<FontAwesomeIcon icon={faArrowRight} />}
-          >
-            Đăng ký mới
-          </Button>
-        </div>
-      </Modal>
+      <ModalLogin
+        showModal={showModal}
+        setShowModal={setShowModal}
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+      />
       <div className={cx("inner")}>
         <div className={cx("logo-link")}>
           <Link to={config.routes.home}>
@@ -204,7 +165,7 @@ function Header() {
 
           <NavLink
             className={(nav) => cx("action-item", { active: nav.isActive })}
-            to={config.routes.result}
+            to={"/result/Hôm nay"}
           >
             Kết Quả
           </NavLink>
@@ -216,7 +177,7 @@ function Header() {
           </NavLink>
           <NavLink
             className={(nav) => cx("action-item", { active: nav.isActive })}
-            to={config.routes.news}
+            to={"/news/page/1"}
           >
             Tin Tức
           </NavLink>
