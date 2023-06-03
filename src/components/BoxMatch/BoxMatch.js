@@ -91,7 +91,11 @@ function BoxMatch({ data, large }) {
             </div>
           </div>
           <footer className={cx("footer")}>
-            {data.commentators !== null ? (
+            {data.commentators === null ? (
+              <div></div>
+            ) : data.commentators.length === 0 ? (
+              <div></div>
+            ) : (
               <>
                 <div className={cx("commentator")}>
                   <div className={cx("icon")}>
@@ -102,8 +106,6 @@ function BoxMatch({ data, large }) {
                   </div>
                 </div>
               </>
-            ) : (
-              <div></div>
             )}
             <div className={cx("button")}>
               <Button to={"./register"} live small>
