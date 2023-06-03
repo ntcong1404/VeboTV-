@@ -13,7 +13,6 @@ function BoxHot({ status, data }) {
     navigate(`/${status}/${slug}/${id}`);
     window.location.reload();
   };
-
   return data?.map((item, index) => (
     <>
       <div key={index} className={cx("boxhot-item")}>
