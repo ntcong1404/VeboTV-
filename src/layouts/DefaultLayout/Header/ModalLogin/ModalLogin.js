@@ -5,8 +5,6 @@ import classNames from "classnames/bind";
 import { useNavigate } from "react-router-dom";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/compat/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import "../../../../firebase/firebase";
 
 import Button from "../../../../components/Button";
 import styles from "./ModalLogin.module.scss";
@@ -16,6 +14,8 @@ import {
   faClose,
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
+import { UserAuth } from "../../../../context/AuthContext";
+import { auth } from "../../../../firebase/firebase";
 
 const cx = classNames.bind(styles);
 
@@ -27,13 +27,12 @@ const uiConfig = {
 
 function ModalLogin({ showModal, setShowModal }) {
   const navigate = useNavigate();
+  const { signIn } = UserAuth();
 
   const [loading, setLoading] = useState(false);
   const [mailValue, setMailValue] = useState("");
   const [passValue, setPassValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  const auth = getAuth();
 
   const handleChangeEmail = (e) => {
     const valueMail = e.target.value;
@@ -48,14 +47,14 @@ function ModalLogin({ showModal, setShowModal }) {
     e.preventDefault();
     try {
       setLoading(true);
-      await signInWithEmailAndPassword(auth, mailValue, passValue)
+      await signIn(mailValue, passValue)
         .then(() => {
           setLoading(false);
           setShowModal(!showModal);
         })
-        .catch((err) => setErrorMessage(err.code));
-    } catch (err) {
-      console.log(err);
+        .catch((error) => setErrorMessage(error.code));
+    } catch (error) {
+      console.log(error);
     }
   };
 

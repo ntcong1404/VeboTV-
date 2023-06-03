@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
@@ -13,28 +14,35 @@ import images from "../../assets/images";
 import Image from "../../components/Image";
 import { ModalPass } from "./modalChangePass";
 import { ModalAvatar } from "./modalChangeAvatar";
-
-import { NavLink } from "react-router-dom";
+import { UserAuth } from "../../context/AuthContext";
 
 const cx = classNames.bind(styles);
 
 function Profile() {
-  const [name, setName] = useState("vd nntcong");
-  const [value, setValue] = useState(name);
+  const { user, updateUserProfile } = UserAuth();
+  console.log(user);
+
+  const [value, setValue] = useState(user.displayName ? user.displayName : "");
   const [startEdit, setStartEdit] = useState(false);
 
   const [showModalPass, setShowModalPass] = useState(false);
   const [showModalAvatar, setShowModalAvatar] = useState(false);
 
-  const [chooseAvatar, setChooseAvatar] = useState(images.user);
-
-  const handleSuccessEdit = () => {
-    setName(value);
+  const handleSuccessEdit = async () => {
+    try {
+      await updateUserProfile(value, user.photoURL)
+        .then(() => {
+          console.log("update password success");
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.log(err);
+    }
     setStartEdit(!startEdit);
   };
 
   const handleCancelEdit = () => {
-    setValue(name);
+    setValue(user.displayName);
     setStartEdit(!startEdit);
   };
 
@@ -45,14 +53,13 @@ function Profile() {
         setShowModalPass={setShowModalPass}
       />
       <ModalAvatar
-        setChooseAvatar={setChooseAvatar}
         showModalAvatar={showModalAvatar}
         setShowModalAvatar={setShowModalAvatar}
       />
 
       <div className={cx("container")}>
         <div className={cx("header")}>
-          <h2>NTCong</h2>
+          <h2>{user.displayName}</h2>
           <div className={cx("navbar")}>
             <NavLink
               className={(nav) => cx("nav-item", { active: nav.isActive })}
@@ -81,7 +88,7 @@ function Profile() {
               <input
                 className={cx("input-control")}
                 type="email"
-                value={"abc@gmail.com"}
+                value={user.email}
                 disabled={true}
               />
             </div>
@@ -124,7 +131,10 @@ function Profile() {
               <input
                 className={cx("input-control")}
                 type="text"
-                value={"14/04/2023"}
+                value={
+                  user.metadata !== undefined &&
+                  new Date(Number(user.metadata.createdAt)).toLocaleDateString()
+                }
                 disabled={true}
               />
             </div>
@@ -144,7 +154,7 @@ function Profile() {
               className={cx("avatar-gr")}
               onClick={() => setShowModalAvatar(!showModalAvatar)}
             >
-              <Image src={chooseAvatar} className={cx("image")} />
+              <Image src={user.photoURL} className={cx("image")} />
               <p className={cx("title")}>Đổi avatar</p>
             </div>
           </div>

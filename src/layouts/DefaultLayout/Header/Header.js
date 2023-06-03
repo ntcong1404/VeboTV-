@@ -2,16 +2,14 @@ import { useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Tippy from "@tippyjs/react/headless";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import {
   faChevronDown,
   faFutbolBall,
   faRightFromBracket,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import { getAuth, signOut } from "firebase/auth";
 
 import * as Service from "../../../apiService/Service";
 import images from "../../../assets/images";
@@ -20,7 +18,7 @@ import styles from "./Header.module.scss";
 import config from "../../../config";
 import Button from "../../../components/Button";
 import ModalLogin from "./ModalLogin";
-import "../../../firebase/firebase";
+import { UserAuth } from "../../../context/AuthContext";
 
 const cx = classNames.bind(styles);
 
@@ -41,29 +39,11 @@ const userMenu = [
 function Header() {
   const navigate = useNavigate();
 
-  const [currentUser, setCurrentUser] = useState(null);
+  const { user, currentUser, logOut } = UserAuth();
+
   const [showModal, setShowModal] = useState(false);
 
   const [leagues, setLeagues] = useState([]);
-
-  const auth = getAuth();
-
-  // handle firebase auth change
-  useEffect(() => {
-    const unregisterAuthObserver = auth.onAuthStateChanged(async (user) => {
-      if (!user) {
-        console.log("user is not registered");
-        return;
-      }
-
-      const token = await user.getIdToken();
-      console.log(token);
-      setCurrentUser(!!user);
-    });
-    return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-  }, [auth]);
-
-  // loading cho button dang nhap
 
   useEffect(() => {
     Service.Leagues()
@@ -113,24 +93,17 @@ function Header() {
     </div>
   );
 
-  const handleLogOut = () => {
-    signOut(auth)
-      .then(() => {
-        setCurrentUser(null);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const handleLogOut = async () => {
+    try {
+      await logOut();
+    } catch (error) {
+      console.log();
+    }
   };
 
   return (
     <header className={cx("wrapper")}>
-      <ModalLogin
-        showModal={showModal}
-        setShowModal={setShowModal}
-        currentUser={currentUser}
-        setCurrentUser={setCurrentUser}
-      />
+      <ModalLogin showModal={showModal} setShowModal={setShowModal} />
       <div className={cx("inner")}>
         <div className={cx("logo-link")}>
           <Link to={config.routes.home}>
@@ -165,21 +138,39 @@ function Header() {
 
           <NavLink
             className={(nav) => cx("action-item", { active: nav.isActive })}
-            to={"/result/Hôm nay"}
+            to={"/result"}
           >
             Kết Quả
           </NavLink>
           <NavLink
             className={(nav) => cx("action-item", { active: nav.isActive })}
-            to={config.routes.schedule}
+            to={"/schedule"}
           >
             Lịch Thi Đấu
           </NavLink>
           <NavLink
             className={(nav) => cx("action-item", { active: nav.isActive })}
-            to={"/news/page/1"}
+            to={"/news"}
           >
             Tin Tức
+          </NavLink>
+          <NavLink
+            className={(nav) => cx("action-item", { active: nav.isActive })}
+            to={"/highlight"}
+          >
+            Highlight
+          </NavLink>
+          <NavLink
+            className={(nav) => cx("action-item", { active: nav.isActive })}
+            to={"/scrutiny"}
+          >
+            Soi kèo
+          </NavLink>
+          <NavLink
+            className={(nav) => cx("action-item", { active: nav.isActive })}
+            to={"/replay"}
+          >
+            Xem lại
           </NavLink>
         </div>
         <div style={{ display: "flex", alignItems: "center" }}>
@@ -200,9 +191,8 @@ function Header() {
             >
               <Image
                 className={cx("user-avatar")}
-                alt="NTCong"
-                // có API sẽ gọi lấy ra user rồi render ra
-                src={images.user}
+                alt={user.displayName}
+                src={user.photoURL}
               />
             </Tippy>
           ) : (

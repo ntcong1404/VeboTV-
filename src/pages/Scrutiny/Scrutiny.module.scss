@@ -42,7 +42,7 @@
   }
 }
 
-.news-highlight {
+.scrutiny-highlight {
   display: flex;
   flex-direction: row;
   flex: 0 0 100%;
@@ -78,15 +78,16 @@
   }
 }
 
-.news-list {
+.scrutiny-list {
   display: flex;
   flex-wrap: wrap;
   margin: 0 -4px;
-  .news-item {
+  .scrutiny-item {
     flex: 0 0 33.33333%;
     max-width: 33.33333%;
     min-height: 200px;
     padding: 0 4px;
+    margin-bottom: 16px;
     overflow: hidden;
     .item-img {
       width: 100%;
@@ -97,7 +98,7 @@
         object-fit: cover;
       }
     }
-    .highlight-name {
+    .scrutiny-name {
       width: 100%;
       margin-top: 10px;
       font-weight: 500;

@@ -1,19 +1,17 @@
 import classNames from "classnames/bind";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 import styles from "./Register.module.scss";
 import Image from "../../components/Image";
 import Button from "../../components/Button";
 import images from "../../assets/images";
 import config from "../../config";
-import "../../firebase/firebase";
+import { UserAuth } from "../../context/AuthContext";
 
 const cx = classNames.bind(styles);
 
@@ -31,6 +29,7 @@ const schema = yup
 
 function Register() {
   const navigate = useNavigate();
+  const { createUser } = UserAuth();
 
   const [showPass, setShowPass] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -39,9 +38,8 @@ function Register() {
   const [pass, setPass] = useState("");
 
   const registerUser = async (e) => {
-    const auth = getAuth();
     try {
-      await createUserWithEmailAndPassword(auth, email, pass)
+      await createUser(email, pass)
         .then(() =>
           setInterval(() => {
             navigate("/");

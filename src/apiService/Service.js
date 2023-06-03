@@ -99,7 +99,34 @@ export const About = async () => {
 
 export const NewsPage = async ({ page }) => {
   try {
-    const res = await request.get(`news/vebotv/list/${page}`);
+    const res = await request.get(`news/vebotv/list/news/${page}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const HighLight = async ({ page }) => {
+  try {
+    const res = await request.get(`news/vebotv/list/highlight/${page}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const Replay = async ({ page }) => {
+  try {
+    const res = await request.get(`news/vebotv/list/xemlai/${page}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const Scrutiny = async ({ page }) => {
+  try {
+    const res = await request.get(`news/vebotv/list/soikeo/${page}`);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -119,6 +146,15 @@ export const MatchLiveMeta = async ({ id }) => {
   try {
     const res = await request.get(`match/${id}/meta`);
     return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const RecordMatch = async ({ id }) => {
+  try {
+    const res = await request.get(`news/vebotv/detail/${id}`);
+    return res;
   } catch (error) {
     console.log(error);
   }

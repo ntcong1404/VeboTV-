@@ -1,0 +1,39 @@
+.boxhot-item {
+  display: flex;
+  align-items: center;
+  min-height: 130px;
+  padding: 10px;
+  background-color: var(--background-main);
+  margin-bottom: 1px;
+  &:hover {
+    background-color: var(--background-box);
+  }
+}
+.content {
+  display: flex;
+  padding: 8px;
+  .desc {
+    margin-left: 20px;
+    p {
+      font-size: 1.5rem;
+      &:hover {
+        cursor: pointer;
+        color: var(--green-color);
+      }
+    }
+  }
+  .boxhot-image {
+    flex: 0 0 50%;
+    width: 50%;
+    height: 130px;
+    .img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

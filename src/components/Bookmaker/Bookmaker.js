@@ -19,9 +19,9 @@ function Bookmaker({ small }) {
       })
       .catch((error) => console.log(error));
   }, []);
-  return sidebarAds.map((data) => (
+  return sidebarAds.map((data, index) => (
     <>
-      <div className={cx("bookmaker-item", { small })}>
+      <div key={index} className={cx("bookmaker-item", { small })}>
         <div className={cx("info-bookmaker")}>
           <a href={data.href}>
             <Image className={cx("bookmaker-img")} src={data.src} />

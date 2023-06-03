@@ -25,40 +25,52 @@ const month = [
 const date = [
   {
     date:
-      dayjs().date(dayjs().date() - 3).$D +
+      dayjs()
+        .date(dayjs().date() - 3)
+        .format("DD") +
       "-" +
       month[dayjs().date(dayjs().date() - 3).$M],
     to:
       dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date() - 3).$M] +
-      dayjs().date(dayjs().date() - 3).$D,
+      dayjs()
+        .date(dayjs().date() - 3)
+        .format("DD"),
   },
   {
     date:
-      dayjs().date(dayjs().date() - 2).$D +
+      dayjs()
+        .date(dayjs().date() - 2)
+        .format("DD") +
       "-" +
       month[dayjs().date(dayjs().date() - 2).$M],
     to:
       dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date() - 2).$M] +
-      dayjs().date(dayjs().date() - 2).$D,
+      dayjs()
+        .date(dayjs().date() - 2)
+        .format("DD"),
   },
   {
     date:
-      dayjs().date(dayjs().date() - 1).$D +
+      dayjs()
+        .date(dayjs().date() - 1)
+        .format("DD") +
       "-" +
       month[dayjs().date(dayjs().date() - 1).$M],
     to:
       dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date() - 1).$M] +
-      dayjs().date(dayjs().date() - 1).$D,
+      dayjs()
+        .date(dayjs().date() - 1)
+        .format("DD"),
   },
   {
     date: "Hôm nay",
     to:
       dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date()).$M] +
-      dayjs().date(),
+      dayjs().date(dayjs().date()).format("DD"),
   },
 ];
 
@@ -66,7 +78,7 @@ function Result() {
   const [active, setActive] = useState(
     dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date()).$M] +
-      dayjs().date()
+      dayjs().date(dayjs().date()).format("DD")
   );
 
   const [resultPageTo, setResultPageTo] = useState(active);
@@ -80,7 +92,10 @@ function Result() {
   useEffect(() => {
     Service.SchedulePageDay({ to: resultPageTo })
       .then((data) => {
-        setResult(data);
+        const res = data.sort(
+          (a, b) => b.tournament.priority - a.tournament.priority
+        );
+        setResult(res);
       })
       .catch((error) => console.log(error));
   }, [resultPageTo]);
@@ -116,8 +131,8 @@ function Result() {
           </div>
         </div>
         <div className={cx("match-list")}>
-          {result.map((data) => (
-            <BoxLeague data={data} />
+          {result.map((data, index) => (
+            <BoxLeague key={index} data={data} />
           ))}
         </div>
       </div>

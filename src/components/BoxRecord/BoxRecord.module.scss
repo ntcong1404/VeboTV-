@@ -1,48 +1,15 @@
-.wrapper {
-  padding: 0 15px;
+.content {
+  flex: 0 0 66.66667%;
+  max-width: 66.66667%;
+  padding-right: 6px;
+}
+.bookmaker {
+  flex: 0 0 33.33333%;
+  max-width: 33.33333%;
+  padding-left: 6px;
 }
 
-.header {
-  margin-top: 40px;
-  .title {
-    position: relative;
-    margin-right: 90px;
-    margin-left: 10px;
-    font-size: 1.6rem;
-    padding: 14px 0;
-
-    h2 {
-      margin-left: 10px;
-    }
-
-    &::before {
-      content: "";
-      width: 3px;
-      height: 28px;
-      background: #25ff70;
-      position: absolute;
-      bottom: 20px;
-      left: -10px;
-    }
-  }
-}
-
-.main {
-  display: flex;
-
-  .content {
-    flex: 0 0 66.66667%;
-    max-width: 66.66667%;
-    padding-right: 6px;
-  }
-  .bookmaker {
-    flex: 0 0 33.33333%;
-    max-width: 33.33333%;
-    padding-left: 6px;
-  }
-}
-
-.news-highlight {
+.replay-highlight {
   display: flex;
   flex-direction: row;
   flex: 0 0 100%;
@@ -78,15 +45,16 @@
   }
 }
 
-.news-list {
+.replay-list {
   display: flex;
   flex-wrap: wrap;
   margin: 0 -4px;
-  .news-item {
+  .replay-item {
     flex: 0 0 33.33333%;
     max-width: 33.33333%;
     min-height: 200px;
     padding: 0 4px;
+    margin-bottom: 16px;
     overflow: hidden;
     .item-img {
       width: 100%;
@@ -97,7 +65,7 @@
         object-fit: cover;
       }
     }
-    .highlight-name {
+    .replay-name {
       width: 100%;
       margin-top: 10px;
       font-weight: 500;
@@ -116,40 +84,5 @@
         }
       }
     }
-  }
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  list-style-type: none;
-  margin-top: 30px;
-}
-.break-item {
-  display: none;
-}
-.page-item {
-  margin: 20px 8px;
-  background-color: var(--background-main);
-  font-size: 1.5rem;
-  font-weight: 600;
-  .page-link {
-    cursor: pointer;
-    padding: 10px 20px;
-    background-color: var(--background-main);
-    border-radius: 6px;
-  }
-  &:hover .page-link {
-    color: var(--green-color);
-  }
-  &.active {
-    .page-link {
-      cursor: auto;
-      background-color: #25ff70;
-      color: var(--black-color);
-    }
-  }
-  &.disabled {
-    display: none;
   }
 }

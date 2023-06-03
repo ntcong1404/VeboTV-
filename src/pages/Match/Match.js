@@ -25,6 +25,8 @@ function Match() {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  console.log(id);
+
   const [match, setMatch] = useState();
   const [meta, setMeta] = useState();
   const [showChat, setShowChat] = useState(false);
@@ -49,10 +51,10 @@ function Match() {
       .catch((error) => console.log(error));
   }, [id]);
 
-  return match?.map((match) => {
+  return match?.map((match, index) => {
     return (
       <>
-        <div className={cx("container")}>
+        <div key={index} className={cx("container")}>
           <div className={cx("header")}>
             <div className={cx("title")}>
               <h2>{match.name}</h2>

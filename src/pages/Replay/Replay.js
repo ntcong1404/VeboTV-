@@ -5,15 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 import * as Service from "../../apiService/Service";
-import styles from "./News.module.scss";
+import styles from "./Replay.module.scss";
 import Bookmaker from "../../components/Bookmaker";
 import BoxRecord from "../../components/BoxRecord";
 
 const cx = classNames.bind(styles);
-// bug call api nhung khong active nav
-function News() {
-  const [news, setNews] = useState([]);
+function Replay() {
+  const [replay, setReplay] = useState([]);
   const [page, setPage] = useState(1);
+  console.log(replay);
 
   const handlePageClick = (data) => {
     setPage(data.selected + 1);
@@ -24,9 +24,9 @@ function News() {
   }, [page]);
 
   useEffect(() => {
-    Service.NewsPage({ page: page })
+    Service.Replay({ page: page })
       .then((data) => {
-        setNews(data);
+        setReplay(data);
       })
       .catch((error) => console.log(error));
   }, [page]);
@@ -35,12 +35,12 @@ function News() {
     <div className={cx("wrapper")}>
       <div className={cx("header")}>
         <div className={cx("title")}>
-          <h2>TIN TỨC</h2>
+          <h2>XEM LẠI NHỮNG TRẬN ĐẤU ĐỈNH CAO NHẤT TRÊN 90PHUT TV</h2>
         </div>
       </div>
 
       <div className={cx("main")}>
-        <BoxRecord status="news" data={news} />
+        <BoxRecord status="replay" data={replay} />
         <div className={cx("bookmaker")}>
           <Bookmaker small />
         </div>
@@ -49,7 +49,7 @@ function News() {
         <ReactPaginate
           previousLabel={<FontAwesomeIcon icon={faArrowLeft} />}
           nextLabel={<FontAwesomeIcon icon={faArrowRight} />}
-          pageCount={Math.ceil(news.total / news.limit)}
+          pageCount={Math.ceil(replay.total / replay.limit)}
           marginPagesDisplayed={0}
           pageRangeDisplayed={6}
           onPageChange={handlePageClick}
@@ -69,4 +69,4 @@ function News() {
   );
 }
 
-export default News;
+export default Replay;

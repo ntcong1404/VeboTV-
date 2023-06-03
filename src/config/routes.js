@@ -1,12 +1,16 @@
 const routes = {
   home: "/",
-  profile: "/profile",
-  result: "/result/:date",
+  result: "/result",
   schedule: "/schedule",
-  news: "/news/page/:number",
+  news: "/news",
+  highlight: "/highlight",
+  scrutiny: "/scrutiny",
+  replay: "/replay",
+  profile: "/profile",
   register: "/register",
   match: "/match-live/:match/:id",
   league: "/league/:slug/:id",
+  recordMatch: "/:status/:slug/:id",
 };
 
 export default routes;

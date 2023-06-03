@@ -1,3 +1,4 @@
+import { getAuth } from "firebase/auth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 
@@ -8,5 +9,7 @@ const configFireBase = {
   projectId: "vebotv-c6f41",
 };
 const app = firebase.initializeApp(configFireBase);
+
+export const auth = getAuth(app);
 
 export default app;

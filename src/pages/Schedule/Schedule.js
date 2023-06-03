@@ -28,37 +28,49 @@ const date = [
     to:
       dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date()).$M] +
-      dayjs().date(),
+      dayjs().date(dayjs().date()).format("DD"),
   },
   {
     date:
-      dayjs().date(dayjs().date() + 1).$D +
+      dayjs()
+        .date(dayjs().date() + 1)
+        .format("DD") +
       "/" +
       month[dayjs().date(dayjs().date() + 1).$M],
     to:
       dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date() + 1).$M] +
-      dayjs().date(dayjs().date() + 1).$D,
+      dayjs()
+        .date(dayjs().date() + 1)
+        .format("DD"),
   },
   {
     date:
-      dayjs().date(dayjs().date() + 2).$D +
+      dayjs()
+        .date(dayjs().date() + 2)
+        .format("DD") +
       "/" +
       month[dayjs().date(dayjs().date() + 2).$M],
     to:
       dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date() + 2).$M] +
-      dayjs().date(dayjs().date() + 2).$D,
+      dayjs()
+        .date(dayjs().date() + 2)
+        .format("DD"),
   },
   {
     date:
-      dayjs().date(dayjs().date() + 3).$D +
+      dayjs()
+        .date(dayjs().date() + 3)
+        .format("DD") +
       "/" +
       month[dayjs().date(dayjs().date() + 3).$M],
     to:
       dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date() + 3).$M] +
-      dayjs().date(dayjs().date() + 3).$D,
+      dayjs()
+        .date(dayjs().date() + 3)
+        .format("DD"),
   },
 ];
 
@@ -66,7 +78,7 @@ function Schedule() {
   const [active, setActive] = useState(
     dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date()).$M] +
-      dayjs().date()
+      dayjs().date(dayjs().date()).format("DD")
   );
   const [schedulePageTo, setSchedulePageTo] = useState(active);
   const [schedule, setSchedule] = useState([]);
@@ -79,7 +91,10 @@ function Schedule() {
   useEffect(() => {
     Service.SchedulePageDay({ to: schedulePageTo })
       .then((data) => {
-        setSchedule(data);
+        const res = data.sort(
+          (a, b) => b.tournament.priority - a.tournament.priority
+        );
+        setSchedule(res);
       })
       .catch((error) => console.log(error));
   }, [schedulePageTo]);
@@ -114,8 +129,8 @@ function Schedule() {
           </div>
         </div>
         <div className={cx("match-list")}>
-          {schedule.map((data) => (
-            <BoxLeague data={data} />
+          {schedule.map((data, index) => (
+            <BoxLeague key={index} data={data} />
           ))}
         </div>
       </div>

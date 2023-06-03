@@ -10,6 +10,7 @@ import styles from "./LiveSchedule.module.scss";
 import Button from "../../../components/Button";
 import * as Service from "../../../apiService/Service";
 import BoxLeague from "../../../components/BoxLeague";
+import { format } from "prettier";
 
 const cx = classNames.bind(styles);
 
@@ -38,58 +39,77 @@ const month = [
 ];
 const date = [
   {
-    date: dayjs().date(dayjs().date() - 1).$D,
+    date: dayjs()
+      .date(dayjs().date() - 1)
+      .format("DD"),
     day: day[dayjs().date(dayjs().date() - 1).$W],
     to:
       dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date() - 1).$M] +
-      dayjs().date(dayjs().date() - 1).$D,
+      dayjs()
+        .date(dayjs().date() - 1)
+        .format("DD"),
   },
   {
-    date: dayjs().date(),
+    date: dayjs().date(dayjs().date()).format("DD"),
     day: "Hôm nay",
     to:
       dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date()).$M] +
-      dayjs().date(),
+      dayjs().date(dayjs().date()).format("DD"),
   },
   {
-    date: dayjs().date(dayjs().date() + 1).$D,
+    date: dayjs()
+      .date(dayjs().date() + 1)
+      .format("DD"),
     day: day[dayjs().date(dayjs().date() + 1).$W],
     to:
       dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date() + 1).$M] +
-      dayjs().date(dayjs().date() + 1).$D,
+      dayjs()
+        .date(dayjs().date() + 1)
+        .format("DD"),
   },
   {
-    date: dayjs().date(dayjs().date() + 2).$D,
+    date: dayjs()
+      .date(dayjs().date() + 2)
+      .format("DD"),
     day: day[dayjs().date(dayjs().date() + 2).$W],
     to:
       dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date() + 2).$M] +
-      dayjs().date(dayjs().date() + 2).$D,
+      dayjs()
+        .date(dayjs().date() + 2)
+        .format("DD"),
   },
   {
-    date: dayjs().date(dayjs().date() + 3).$D,
+    date: dayjs()
+      .date(dayjs().date() + 3)
+      .format("DD"),
     day: day[dayjs().date(dayjs().date() + 3).$W],
     to:
       dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date() + 3).$M] +
-      dayjs().date(dayjs().date() + 3).$D,
+      dayjs()
+        .date(dayjs().date() + 3)
+        .format("DD"),
   },
 ];
 
 function LiveSchedule() {
+  console.log(dayjs().date(dayjs().date()).format("DD"));
+
   const [active, setActive] = useState(
     dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date()).$M] +
-      dayjs().date()
+      dayjs().date(dayjs().date()).format("DD")
   );
   const [liveScheduleTo, setLiveScheduleTo] = useState(active);
   const [liveScheduleResult, setLiveScheduleResult] = useState([]);
   const [live, setLive] = useState([]);
 
   const handleLive = () => {
+    setActive();
     setLiveScheduleResult(live);
   };
 
@@ -113,7 +133,10 @@ function LiveSchedule() {
   useEffect(() => {
     Service.LiveScheduleDay({ to: liveScheduleTo })
       .then((data) => {
-        setLiveScheduleResult(data);
+        const res = data.sort(
+          (a, b) => b.tournament.priority - a.tournament.priority
+        );
+        setLiveScheduleResult(res);
       })
       .catch((error) => console.log(error));
   }, [liveScheduleTo]);

@@ -8,6 +8,7 @@ import { avatarClub, avatarPlayer } from "../../../assets/images/avatar";
 import styles from "./modalChangeAvatar.module.scss";
 import Button from "../../../components/Button";
 import Image from "../../../components/Image";
+import { UserAuth } from "../../../context/AuthContext";
 
 const cx = classNames.bind(styles);
 
@@ -16,30 +17,38 @@ const listAvatar = [
   { title: "Câu lạc bộ", avatar: avatarClub },
 ];
 
-function ModalChangeAvatar({
-  showModalAvatar,
-  setShowModalAvatar,
-  setChooseAvatar,
-}) {
+function ModalChangeAvatar({ showModalAvatar, setShowModalAvatar }) {
+  const { user, updateUserProfile } = UserAuth();
+
   const [avatar, setAvatar] = useState([]);
   const [active, setActive] = useState(avatarPlayer);
-  const [saveAvatar, setSaveAvatar] = useState(avatarPlayer[0].avatar);
+  const [saveAvatar, setSaveAvatar] = useState(user.photoURL);
+  console.log(saveAvatar);
 
   const handleAvatar = ({ item }) => {
     setActive(item.avatar);
   };
 
-  const handleSaveAvatar = () => {
-    // prop ngoai(saveAvatar)
-    setChooseAvatar(saveAvatar);
+  const handleSaveAvatar = async () => {
+    try {
+      await updateUserProfile(user.displayName, saveAvatar)
+        .then(() => {
+          console.log("update avatar success");
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.log(err);
+    }
     setShowModalAvatar(!showModalAvatar);
   };
 
   const handleChooseFileAvatar = (e) => {
     if (e.target.files && e.target.files[0]) {
-      setChooseAvatar(URL.createObjectURL(e.target.files[0]));
+      console.log(e.target.files[0]);
+      setSaveAvatar(URL.createObjectURL(e.target.files[0]));
       setShowModalAvatar(!showModalAvatar);
     }
+    return () => URL.revokeObjectURL(e.target.files[0]);
   };
 
   useEffect(() => {
@@ -70,6 +79,7 @@ function ModalChangeAvatar({
               type="file"
               accept="image/*"
               onChange={handleChooseFileAvatar}
+              disabled
             />
           </button>
         </div>
@@ -78,6 +88,7 @@ function ModalChangeAvatar({
         <div className={cx("nav-list-avatar")}>
           {listAvatar.map((item, index) => (
             <div
+              key={index}
               className={cx("nav-item-avatar", {
                 active: active === item.avatar ? "active" : "",
               })}
@@ -92,15 +103,14 @@ function ModalChangeAvatar({
       <div className={cx("choose-avatar")}>
         {avatar.map((avatar, index) => (
           <div
-            className={cx("avatar-item")}
             key={index}
+            className={cx("avatar-item")}
             onClick={() => setSaveAvatar(avatar.avatar)}
           >
             <Image
               className={cx("avatar-img", {
                 active: saveAvatar === avatar.avatar ? "choose" : "",
               })}
-              key={index}
               src={avatar.avatar}
               alt=""
               loading="lazy"

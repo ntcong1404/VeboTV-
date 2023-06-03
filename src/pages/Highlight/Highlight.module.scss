@@ -42,7 +42,7 @@
   }
 }
 
-.news-highlight {
+.highlight-highlight {
   display: flex;
   flex-direction: row;
   flex: 0 0 100%;
@@ -78,15 +78,16 @@
   }
 }
 
-.news-list {
+.highlight-list {
   display: flex;
   flex-wrap: wrap;
   margin: 0 -4px;
-  .news-item {
+  .highlight-item {
     flex: 0 0 33.33333%;
     max-width: 33.33333%;
     min-height: 200px;
     padding: 0 4px;
+    margin-bottom: 16px;
     overflow: hidden;
     .item-img {
       width: 100%;
