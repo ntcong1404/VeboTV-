@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,7 +10,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./Profile.module.scss";
-import images from "../../assets/images";
 import Image from "../../components/Image";
 import { ModalPass } from "./modalChangePass";
 import { ModalAvatar } from "./modalChangeAvatar";

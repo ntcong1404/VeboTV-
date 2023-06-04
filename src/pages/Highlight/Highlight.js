@@ -6,7 +6,6 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 import * as Service from "../../apiService/Service";
 import styles from "./Highlight.module.scss";
-import Image from "../../components/Image";
 import Bookmaker from "../../components/Bookmaker";
 import BoxRecord from "../../components/BoxRecord";
 

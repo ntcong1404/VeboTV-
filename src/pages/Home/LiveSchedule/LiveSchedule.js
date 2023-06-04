@@ -10,7 +10,6 @@ import styles from "./LiveSchedule.module.scss";
 import Button from "../../../components/Button";
 import * as Service from "../../../apiService/Service";
 import BoxLeague from "../../../components/BoxLeague";
-import { format } from "prettier";
 
 const cx = classNames.bind(styles);
 

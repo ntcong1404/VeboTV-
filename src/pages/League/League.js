@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import { useState, useEffect } from "react";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import * as Service from "../../apiService/Service";
