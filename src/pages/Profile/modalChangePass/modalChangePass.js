@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Modal from "react-modal";
 import classNames from "classnames/bind";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -44,5 +45,10 @@ function modalChangePass({ showModalPass, setShowModalPass }) {
     </Modal>
   );
 }
+
+modalChangePass.propTypes = {
+  showModalPass: PropTypes.bool.isRequired,
+  setShowModalPass: PropTypes.bool.isRequired,
+};
 
 export default modalChangePass;

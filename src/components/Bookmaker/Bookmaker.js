@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import classNames from "classnames/bind";
 import { useState, useEffect } from "react";
 import * as Service from "../../apiService/Service";
@@ -20,31 +21,31 @@ function Bookmaker({ small }) {
       .catch((error) => console.log(error));
   }, []);
   return sidebarAds.map((data, index) => (
-    <>
-      <div key={index} className={cx("bookmaker-item", { small })}>
-        <div className={cx("info-bookmaker")}>
-          <a href={data.href}>
-            <Image className={cx("bookmaker-img")} src={data.src} />
-          </a>
-          <div className={cx("title")}>
-            <h3 className={cx("name")}>{data.name}</h3>
-            {small ? (
-              <></>
-            ) : (
-              <>
-                <p className={cx("decs")}>
-                  {<Markup content={data.content} />}
-                </p>
-              </>
-            )}
-          </div>
+    <div key={index} className={cx("bookmaker-item", { small })}>
+      <div className={cx("info-bookmaker")}>
+        <a href={data.href}>
+          <Image className={cx("bookmaker-img")} src={data.src} />
+        </a>
+        <div className={cx("title")}>
+          <h3 className={cx("name")}>{data.name}</h3>
+          {small ? (
+            <></>
+          ) : (
+            <>
+              <p className={cx("decs")}>{<Markup content={data.content} />}</p>
+            </>
+          )}
         </div>
-        <Button bet large to={""} className={cx("bookmaker-btn")}>
-          Cược ngay
-        </Button>
       </div>
-    </>
+      <Button bet large to={""} className={cx("bookmaker-btn")}>
+        Cược ngay
+      </Button>
+    </div>
   ));
 }
+
+Bookmaker.propTypes = {
+  small: PropTypes.bool,
+};
 
 export default Bookmaker;

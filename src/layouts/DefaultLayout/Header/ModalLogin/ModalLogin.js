@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-modal";
@@ -16,6 +17,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { UserAuth } from "../../../../context/AuthContext";
 import { auth } from "../../../../firebase/firebase";
+import { type } from "@testing-library/user-event/dist/type";
 
 const cx = classNames.bind(styles);
 
@@ -129,5 +131,10 @@ function ModalLogin({ showModal, setShowModal }) {
     </Modal>
   );
 }
+
+ModalLogin.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  setShowModal: PropTypes.func.isRequired,
+};
 
 export default ModalLogin;

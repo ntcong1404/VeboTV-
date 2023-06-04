@@ -13,7 +13,6 @@ const cx = classNames.bind(styles);
 function Replay() {
   const [replay, setReplay] = useState([]);
   const [page, setPage] = useState(1);
-  console.log(replay);
 
   const handlePageClick = (data) => {
     setPage(data.selected + 1);

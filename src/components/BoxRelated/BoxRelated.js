@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import classNames from "classnames/bind";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -39,5 +40,9 @@ function BoxRelated({ status, data }) {
     </div>
   );
 }
+
+BoxRelated.propTypes = {
+  status: PropTypes.string,
+};
 
 export default BoxRelated;

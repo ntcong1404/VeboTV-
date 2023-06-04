@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import classNames from "classnames/bind";
 import { useNavigate } from "react-router-dom";
 
@@ -14,23 +15,24 @@ function BoxHot({ status, data }) {
     window.location.reload();
   };
   return data?.map((item, index) => (
-    <>
-      <div key={index} className={cx("boxhot-item")}>
-        <div className={cx("content")}>
-          <div className={cx("boxhot-image")}>
-            <Image
-              onClick={() => handleClick(item.slug, item.id)}
-              className={cx("img")}
-              src={item.feature_image}
-            />
-          </div>
-          <div className={cx("desc")}>
-            <p onClick={() => handleClick(item.slug, item.id)}>{item.name}</p>
-          </div>
+    <div key={index} className={cx("boxhot-item")}>
+      <div className={cx("content")}>
+        <div className={cx("boxhot-image")}>
+          <Image
+            onClick={() => handleClick(item.slug, item.id)}
+            className={cx("img")}
+            src={item.feature_image}
+          />
+        </div>
+        <div className={cx("desc")}>
+          <p onClick={() => handleClick(item.slug, item.id)}>{item.name}</p>
         </div>
       </div>
-    </>
+    </div>
   ));
 }
 
+BoxHot.propTypes = {
+  status: PropTypes.string,
+};
 export default BoxHot;

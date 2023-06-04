@@ -196,22 +196,20 @@ function Home() {
         <div className={cx("news-content")}>
           <div className={cx("news-list")}>
             {news?.map((item) => (
-              <>
-                <div key={item.id} className={cx("news-item")}>
-                  <div className={cx("news-image")}>
-                    <Image
-                      loading="lazy"
-                      src={item.feature_image}
-                      className={cx("news-img")}
-                    />
-                  </div>
-                  <FontAwesomeIcon
-                    className={cx("news-icon")}
-                    icon={faQuoteRight}
+              <div key={item.id} className={cx("news-item")}>
+                <div className={cx("news-image")}>
+                  <Image
+                    loading="lazy"
+                    src={item.feature_image}
+                    className={cx("news-img")}
                   />
-                  <div className={cx("news-title")}>{item.name}</div>
                 </div>
-              </>
+                <FontAwesomeIcon
+                  className={cx("news-icon")}
+                  icon={faQuoteRight}
+                />
+                <div className={cx("news-title")}>{item.name}</div>
+              </div>
             ))}
           </div>
         </div>

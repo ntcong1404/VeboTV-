@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import classNames from "classnames/bind";
 import { useNavigate } from "react-router-dom";
 
@@ -45,27 +46,29 @@ function BoxRecord({ status, data }) {
       )}
       <div className={cx("replay-list")}>
         {data.list?.map((item) => (
-          <>
-            <div className={cx("replay-item")} key={item.id}>
-              <div className={cx("item-img")}>
-                <Image
-                  className={cx("it-image")}
-                  src={item.feature_image}
-                  onClick={() => handleClick(item.slug, item.id)}
-                />
-              </div>
-              <div
-                className={cx("replay-name")}
+          <div className={cx("replay-item")} key={item.id}>
+            <div className={cx("item-img")}>
+              <Image
+                className={cx("it-image")}
+                src={item.feature_image}
                 onClick={() => handleClick(item.slug, item.id)}
-              >
-                {item.name}
-              </div>
+              />
             </div>
-          </>
+            <div
+              className={cx("replay-name")}
+              onClick={() => handleClick(item.slug, item.id)}
+            >
+              {item.name}
+            </div>
+          </div>
         ))}
       </div>
     </div>
   );
 }
+
+BoxRecord.propTypes = {
+  status: PropTypes.string,
+};
 
 export default BoxRecord;

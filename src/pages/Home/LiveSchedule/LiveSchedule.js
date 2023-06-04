@@ -97,8 +97,6 @@ const date = [
 ];
 
 function LiveSchedule() {
-  console.log(dayjs().date(dayjs().date()).format("DD"));
-
   const [active, setActive] = useState(
     dayjs().date(dayjs().date()).$y +
       month[dayjs().date(dayjs().date()).$M] +

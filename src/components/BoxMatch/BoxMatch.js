@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import classNames from "classnames/bind";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -121,5 +122,10 @@ function BoxMatch({ data, large }) {
     </div>
   );
 }
+
+BoxMatch.propTypes = {
+  data: PropTypes.object.isRequired,
+  large: PropTypes.bool,
+};
 
 export default BoxMatch;

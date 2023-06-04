@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
 
@@ -6,6 +7,7 @@ import Button from "../Button";
 import Image from "../Image";
 
 const cx = classNames.bind(styles);
+
 function BoxLeague({ data }) {
   const navigate = useNavigate();
   const handleClick = (name, id) => {
@@ -167,5 +169,8 @@ function BoxLeague({ data }) {
     </div>
   );
 }
+BoxLeague.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default BoxLeague;
