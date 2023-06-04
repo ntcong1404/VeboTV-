@@ -28,6 +28,8 @@ function Match() {
   const [match, setMatch] = useState();
   const [meta, setMeta] = useState();
   const [showChat, setShowChat] = useState(false);
+  const [link, setLink] = useState("");
+  console.log(link);
 
   const handleClick = (slug, id) => {
     navigate(`/league/${slug}/${id}`);
@@ -115,6 +117,7 @@ function Match() {
                         bet
                         small
                         leftIcon={<FontAwesomeIcon icon={faArrowRight} />}
+                        onClick={() => setLink(link.url)}
                       >
                         {link.name}
                       </Button>
@@ -122,7 +125,7 @@ function Match() {
                   </div>
                   <div className={cx("screen")}>
                     <ReactPlayer
-                      url={"https://www.youtube.com/watch?v=T09to6U7hQo"}
+                      url={link}
                       controls={true}
                       width="100%"
                       height="100%"

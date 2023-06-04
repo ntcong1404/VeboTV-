@@ -17,7 +17,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { UserAuth } from "../../../../context/AuthContext";
 import { auth } from "../../../../firebase/firebase";
-import { type } from "@testing-library/user-event/dist/type";
 
 const cx = classNames.bind(styles);
 

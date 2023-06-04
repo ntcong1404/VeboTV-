@@ -17,7 +17,6 @@ function RecordMatch() {
   const [data, setData] = useState([]);
   const [dataRelated, setDataRelated] = useState([]);
   const [dataHot, setDataHot] = useState([]);
-
   useEffect(() => {
     Service.RecordMatch({ id })
       .then((res) => {
