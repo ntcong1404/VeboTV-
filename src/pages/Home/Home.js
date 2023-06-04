@@ -148,16 +148,18 @@ function Home() {
               <div className={cx("social-item")}>
                 <FontAwesomeIcon icon={faTelegram} />
               </div>
-              <Tippy
-                interactive
-                offset={[12, 8]}
-                placement="bottom-end"
-                render={renderSocialList}
-              >
-                <div className={cx("social-item")}>
-                  <FontAwesomeIcon icon={faPlus} />
-                </div>
-              </Tippy>
+              <div>
+                <Tippy
+                  interactive
+                  offset={[12, 8]}
+                  placement="bottom-end"
+                  render={renderSocialList}
+                >
+                  <div className={cx("social-item")}>
+                    <FontAwesomeIcon icon={faPlus} />
+                  </div>
+                </Tippy>
+              </div>
             </div>
           </div>
         </div>

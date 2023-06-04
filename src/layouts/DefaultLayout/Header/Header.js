@@ -121,20 +121,21 @@ function Header() {
           >
             Trực Tiếp
           </NavLink>
-
-          <Tippy
-            interactive
-            zIndex={10}
-            delay={[0, 300]}
-            offset={[290, 4]}
-            placement="bottom-end"
-            render={renderLeague}
-          >
-            <NavLink className={cx("action-item")}>
-              Giải Đấu
-              <FontAwesomeIcon className={cx("icon")} icon={faChevronDown} />
-            </NavLink>
-          </Tippy>
+          <div>
+            <Tippy
+              interactive
+              zIndex={10}
+              delay={[0, 300]}
+              offset={[290, 4]}
+              placement="bottom-end"
+              render={renderLeague}
+            >
+              <NavLink className={cx("action-item")}>
+                Giải Đấu
+                <FontAwesomeIcon className={cx("icon")} icon={faChevronDown} />
+              </NavLink>
+            </Tippy>
+          </div>
 
           <NavLink
             className={(nav) => cx("action-item", { active: nav.isActive })}
@@ -183,18 +184,20 @@ function Header() {
             {"Đặt cược"}
           </Button>
           {currentUser ? (
-            <Tippy
-              interactive
-              zIndex={10}
-              placement="bottom-end"
-              render={renderUserMenu}
-            >
-              <Image
-                className={cx("user-avatar")}
-                alt={user.displayName}
-                src={user.photoURL}
-              />
-            </Tippy>
+            <div>
+              <Tippy
+                interactive
+                zIndex={10}
+                placement="bottom-end"
+                render={renderUserMenu}
+              >
+                <Image
+                  className={cx("user-avatar")}
+                  alt={user.displayName}
+                  src={user.photoURL}
+                />
+              </Tippy>
+            </div>
           ) : (
             <Button user xsmall onClick={() => setShowModal(!showModal)}>
               {<FontAwesomeIcon className={cx("icon-user")} icon={faUser} />}
