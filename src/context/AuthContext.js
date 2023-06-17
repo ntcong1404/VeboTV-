@@ -4,6 +4,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 
 import { auth } from "../firebase/firebase";
@@ -23,6 +25,15 @@ export const AuthContextProvider = ({ children }) => {
       displayName,
       photoURL,
     });
+  };
+  const signInGoogle = async () => {
+    await signInWithPopup(auth, new GoogleAuthProvider())
+      .then((result) => {
+        setUser(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const logOut = () => {
@@ -72,6 +83,7 @@ export const AuthContextProvider = ({ children }) => {
         updateUserProfile,
         logOut,
         signIn,
+        signInGoogle,
       }}
     >
       {children}
