@@ -23,7 +23,7 @@
     "moment": "^2.29.4",
     "normalize.css": "^8.0.1",
     "pexels": "^1.4.0",
-    "react": "^18.2.0",
+    "react": "^17.0.2",
     "react-app-rewired": "^2.2.1",
     "react-dom": "^18.2.0",
     "react-firebaseui": "^6.0.0",
