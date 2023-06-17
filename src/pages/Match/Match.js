@@ -7,18 +7,17 @@ import {
   faArrowRight,
   faDivide,
   faFutbolBall,
-  faMessage,
   faMicrophone,
   faMobilePhone,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
-import Tippy from "@tippyjs/react";
 
 import * as Service from "../../apiService/Service";
 import styles from "./Match.module.scss";
 import Image from "../../components/Image";
 import Button from "../../components/Button";
 import Bookmaker from "../../components/Bookmaker";
+import BoxChat from "./BoxChat";
 
 const cx = classNames.bind(styles);
 function Match() {
@@ -27,7 +26,6 @@ function Match() {
 
   const [match, setMatch] = useState();
   const [meta, setMeta] = useState();
-  const [showChat, setShowChat] = useState(true);
   const [link, setLink] = useState("");
   console.log(link);
   const [simulation, setSimulation] = useState("");
@@ -146,60 +144,32 @@ function Match() {
                   )}
                 </div>
               </div>
-              <div className={cx("lf-right")}>
-                <div className={cx("btn-chat")}>
-                  <Button live small onClick={() => setShowChat(!showChat)}>
-                    {showChat ? "Mở chat" : "Tắt chat"}
-                  </Button>
-                </div>
-                <div className={cx("chat-box")}>
-                  {showChat ? (
-                    <div className={cx("overlay-chat")}>
-                      <Button
-                        bet
-                        small
-                        leftIcon={<FontAwesomeIcon icon={faMessage} />}
-                        onClick={() => setShowChat(!showChat)}
-                      >
-                        Xem bình luận
-                      </Button>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  <div className={cx("cb-header")}>
-                    <div className={cx("top-chat")}></div>
-                    <div className={cx("menu-chat")}></div>
-                  </div>
-                  <div className={cx("cb-content")}></div>
-                  <div className={cx("cb-comment")}>
-                    <div className={cx("cm-avatar")}></div>
-                    <div className={cx("cm-name")}></div>
-                    <div className={cx("cm-input")}></div>
-                    <div className={cx("cm-icon")}></div>
-                    <div className={cx("cm-sent")}></div>
-                  </div>
-                </div>
-              </div>
+              <BoxChat />
             </div>
             <div className={cx("lf-bottom")}>
-              <div className={cx("commentators")}>
-                {meta?.commentators?.map((item, index) => (
-                  <div key={index} className={cx("ct-item")}>
-                    <div className={cx("ct-image")}>
-                      <Image className={cx("ct-img")} src={item.avatar} />
+              {meta?.commentators?.length === 0 ? (
+                <></>
+              ) : meta?.commentators === null ? (
+                <></>
+              ) : (
+                <div className={cx("commentators")}>
+                  {meta?.commentators?.map((item, index) => (
+                    <div key={index} className={cx("ct-item")}>
+                      <div className={cx("ct-image")}>
+                        <Image className={cx("ct-img")} src={item.avatar} />
+                      </div>
+                      <div className={cx("ct-title")}>
+                        <span>Bình luận viên</span>
+                        <div className={cx("ct-name")}>{item.name}</div>
+                      </div>
+                      <FontAwesomeIcon
+                        className={cx("ct-icon")}
+                        icon={faMicrophone}
+                      />
                     </div>
-                    <div className={cx("ct-title")}>
-                      <span>Bình luận viên</span>
-                      <div className={cx("ct-name")}>{item.name}</div>
-                    </div>
-                    <FontAwesomeIcon
-                      className={cx("ct-icon")}
-                      icon={faMicrophone}
-                    />
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
               <Button
                 primary
                 large
