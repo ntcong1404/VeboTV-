@@ -26,7 +26,7 @@
     "react": "^18.2.0",
     "react-app-rewired": "^2.2.1",
     "react-dom": "^18.2.0",
-    "react-firebaseui": "^5.0.2",
+    "react-firebaseui": "^6.0.0",
     "react-hook-form": "^7.43.9",
     "react-modal": "^3.16.1",
     "react-paginate": "^8.2.0",
