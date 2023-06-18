@@ -173,6 +173,12 @@
       background-color: #e2e6ea;
     }
   }
+  + .google {
+    background: var(--white-color);
+    &:hover {
+      background-color: #e2e6ea;
+    }
+  }
 
   icon {
     margin-left: 0;

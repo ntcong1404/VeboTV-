@@ -14,6 +14,7 @@ import {
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import { UserAuth } from "../../../../context/AuthContext";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 const cx = classNames.bind(styles);
 
@@ -129,8 +130,13 @@ function ModalLogin({ showModal, setShowModal }) {
         >
           Đăng ký mới
         </Button>
-        <Button primary onClick={handleLogInGoogle}>
-          Dang nhap voi google
+        <Button
+          className={cx("btn", "google")}
+          primary
+          onClick={handleLogInGoogle}
+          leftIcon={<FontAwesomeIcon icon={faGoogle} />}
+        >
+          Đăng nhập với Google
         </Button>
         {/* <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} /> */}
       </div>
