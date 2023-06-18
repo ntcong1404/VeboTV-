@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import classNames from "classnames/bind";
-import Tippy from "@tippyjs/react";
+import Tippy from "@tippyjs/react/headless";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from "./BoxChat.module.scss";
@@ -20,7 +20,7 @@ const cx = classNames.bind(styles);
 const filter = [
   {
     title: "TOP CHAT",
-    desc: "Some messages, such as potential spam, may not be visible",
+    desc: "Featured messages",
   },
   {
     title: "LIVE CHAT",
@@ -58,22 +58,22 @@ function BoxChat() {
           className={cx("filter-item")}
           onClick={() => handleFilterChat(item)}
         >
-          <div>{item.title}</div>
-          <div>{item.desc}</div>
+          <h3>{item.title}</h3>
+          <h4>{item.desc}</h4>
         </div>
       ))}
     </div>
   );
   const renderMenuChat = (attrs) => (
-    <div className={cx("filter-list")} tabIndex="-1" {...attrs}>
+    <div className={cx("menu-list")} tabIndex="-1" {...attrs}>
       {menu.map((item, index) => (
         <div
           key={index}
-          className={cx("filter-item")}
+          className={cx("menu-item")}
           onClick={() => handleMenuChat(item)}
         >
-          <div>{item.icon}</div>
-          <div>{item.title}</div>
+          <h3>{item.icon}</h3>
+          <h4>{item.title}</h4>
         </div>
       ))}
     </div>
@@ -115,10 +115,9 @@ function BoxChat() {
             <div className={cx("cb-header")}>
               <div className={cx("top-chat")}>
                 <Tippy
-                  trigger="click"
-                  hideOnClick={true}
+                  interactive
                   zIndex={10}
-                  offset={[290, 4]}
+                  offset={[50, 4]}
                   placement="bottom-end"
                   render={renderFilterChat}
                 >
@@ -133,10 +132,9 @@ function BoxChat() {
               </div>
               <div className={cx("menu-chat")}>
                 <Tippy
-                  trigger="click"
-                  hideOnClick={true}
+                  interactive
                   zIndex={10}
-                  offset={[290, 4]}
+                  offset={[10, 10]}
                   placement="bottom-end"
                   render={renderMenuChat}
                 >
