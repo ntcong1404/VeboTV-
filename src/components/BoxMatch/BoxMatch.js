@@ -103,7 +103,9 @@ function BoxMatch({ data, large }) {
                     <FontAwesomeIcon icon={faMicrophone} />
                   </div>
                   <div className={cx("name")}>
-                    {data.commentators.map((item) => item.name)}
+                    {data.commentators.map((item) => (
+                      <span className={cx("name-com")}>{item.name}</span>
+                    ))}
                   </div>
                 </div>
               </>

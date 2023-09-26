@@ -104,7 +104,7 @@ function LiveSchedule() {
   const [liveScheduleTo, setLiveScheduleTo] = useState(active);
   const [liveScheduleResult, setLiveScheduleResult] = useState([]);
   const [live, setLive] = useState([]);
-
+  console.log(liveScheduleResult);
   const handleLive = () => {
     setActive();
     setLiveScheduleResult(live);
