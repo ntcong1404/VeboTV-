@@ -32,11 +32,8 @@ function ModalChangeAvatar({ showModalAvatar, setShowModalAvatar }) {
 
   const handleSaveAvatar = async () => {
     try {
-      await updateUserProfile(user.displayName, saveAvatar)
-        .then(() => {
-          console.log("update avatar success");
-        })
-        .catch((err) => console.log(err));
+      await updateUserProfile(user.displayName, saveAvatar);
+      console.log("update avatar success");
     } catch (err) {
       console.log(err);
     }

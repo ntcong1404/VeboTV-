@@ -29,7 +29,7 @@ const schema = yup
 
 function Register() {
   const navigate = useNavigate();
-  const { user, createUser, updateUserProfile } = UserAuth();
+  const { createUser, updateUserProfile } = UserAuth();
 
   const [showPass, setShowPass] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -40,13 +40,11 @@ function Register() {
   const registerUser = async () => {
     try {
       await createUser(email, pass);
-      await updateUserProfile(name, images.user)
-        .then(() => {
-          navigate("/");
-          window.location.reload();
-        })
-        .catch((err) => setErrorMessage(err.code));
+      await updateUserProfile(name, images.user);
+      navigate("/");
+      window.location.reload();
     } catch (err) {
+      setErrorMessage(err.code);
       console.log(err);
     }
   };

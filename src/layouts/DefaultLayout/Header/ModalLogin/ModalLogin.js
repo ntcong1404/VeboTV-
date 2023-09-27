@@ -38,12 +38,10 @@ function ModalLogin({ showModal, setShowModal }) {
   const handleLogInGoogle = async (e) => {
     e.preventDefault();
     try {
-      await signInGoogle()
-        .then(() => {
-          setShowModal(!showModal);
-        })
-        .catch((error) => setErrorMessage(error.code));
+      await signInGoogle();
+      setShowModal(!showModal);
     } catch (error) {
+      setErrorMessage(error.code);
       console.log(error);
     }
     setShowModal(!showModal);
@@ -53,13 +51,11 @@ function ModalLogin({ showModal, setShowModal }) {
     e.preventDefault();
     try {
       setLoading(true);
-      await signIn(mailValue, passValue)
-        .then(() => {
-          setLoading(false);
-          setShowModal(!showModal);
-        })
-        .catch((error) => setErrorMessage(error.code));
+      await signIn(mailValue, passValue);
+      setLoading(false);
+      setShowModal(!showModal);
     } catch (error) {
+      setErrorMessage(error.code);
       console.log(error);
     }
   };

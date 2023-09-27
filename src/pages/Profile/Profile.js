@@ -29,11 +29,8 @@ function Profile() {
 
   const handleSuccessEdit = async () => {
     try {
-      await updateUserProfile(value, user.photoURL)
-        .then(() => {
-          console.log("update password success");
-        })
-        .catch((err) => console.log(err));
+      await updateUserProfile(value, user.photoURL);
+      console.log("update password success");
     } catch (err) {
       console.log(err);
     }

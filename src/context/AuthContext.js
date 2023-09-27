@@ -27,13 +27,12 @@ export const AuthContextProvider = ({ children }) => {
     });
   };
   const signInGoogle = async () => {
-    await signInWithPopup(auth, new GoogleAuthProvider())
-      .then((result) => {
-        setUser(result.user);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const result = await signInWithPopup(auth, new GoogleAuthProvider());
+      setUser(result.user);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const logOut = () => {
