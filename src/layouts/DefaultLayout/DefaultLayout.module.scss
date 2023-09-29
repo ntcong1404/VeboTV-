@@ -10,3 +10,19 @@
 .content {
   flex: 1;
 }
+
+.btn-totop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 38px;
+  height: 38px;
+  border-radius: 100%;
+  background-color: rgba(29, 255, 142, 0.5);
+  color: black;
+  border-color: rgba(9, 66, 38, 0.4);
+  &:hover {
+    cursor: pointer;
+    scale: 110%;
+  }
+}

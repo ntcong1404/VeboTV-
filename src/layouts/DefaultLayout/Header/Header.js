@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Tippy from "@tippyjs/react/headless";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
+  faCheck,
   faChevronDown,
   faFutbolBall,
   faRightFromBracket,
+  faSpinner,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import "firebase/compat/auth";
@@ -40,9 +42,7 @@ function Header() {
   const navigate = useNavigate();
 
   const { user, currentUser, logOut } = UserAuth();
-
   const [showModal, setShowModal] = useState(false);
-
   const [leagues, setLeagues] = useState([]);
 
   useEffect(() => {
