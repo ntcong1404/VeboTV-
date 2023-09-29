@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import classNames from "classnames/bind";
 import * as dayjs from "dayjs";
+import PuffLoader from "react-spinners/PuffLoader";
 
 import styles from "./Result.module.scss";
 import * as Service from "../../apiService/Service";
@@ -83,6 +84,7 @@ function Result() {
 
   const [resultPageTo, setResultPageTo] = useState(active);
   const [result, setResult] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const handleSchedulePageDay = ({ item }) => {
     setActive(item.to);
@@ -90,12 +92,14 @@ function Result() {
   };
 
   useEffect(() => {
+    setLoading(true);
     Service.SchedulePageDay({ to: resultPageTo })
       .then((data) => {
         const res = data.sort(
           (a, b) => b.tournament.priority - a.tournament.priority
         );
         setResult(res);
+        setLoading(false);
       })
       .catch((error) => console.log(error));
   }, [resultPageTo]);
@@ -131,9 +135,17 @@ function Result() {
           </div>
         </div>
         <div className={cx("match-list")}>
-          {result.map((data, index) => (
-            <BoxLeague key={index} data={data} />
-          ))}
+          {loading ? (
+            <div className={cx("loading")}>
+              <PuffLoader color="gray" size={60} speedMultiplier={1.5} />
+            </div>
+          ) : (
+            <div>
+              {result.map((data, index) => (
+                <BoxLeague key={index} data={data} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

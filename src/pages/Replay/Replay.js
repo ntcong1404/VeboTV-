@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import PuffLoader from "react-spinners/PuffLoader";
 
 import * as Service from "../../apiService/Service";
 import styles from "./Replay.module.scss";
@@ -13,6 +14,7 @@ const cx = classNames.bind(styles);
 function Replay() {
   const [replay, setReplay] = useState([]);
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const handlePageClick = (data) => {
     setPage(data.selected + 1);
@@ -23,9 +25,11 @@ function Replay() {
   }, [page]);
 
   useEffect(() => {
+    setLoading(true);
     Service.Replay({ page: page })
       .then((data) => {
         setReplay(data);
+        setLoading(false);
       })
       .catch((error) => console.log(error));
   }, [page]);
@@ -39,10 +43,18 @@ function Replay() {
       </div>
 
       <div className={cx("main")}>
-        <BoxRecord status="replay" data={replay} />
-        <div className={cx("bookmaker")}>
-          <Bookmaker small />
-        </div>
+        {loading ? (
+          <div className={cx("loading")}>
+            <PuffLoader color="gray" size={60} speedMultiplier={1.5} />
+          </div>
+        ) : (
+          <>
+            <BoxRecord status="replay" data={replay} />
+            <div className={cx("bookmaker")}>
+              <Bookmaker small />
+            </div>
+          </>
+        )}
       </div>
       <div>
         <ReactPaginate

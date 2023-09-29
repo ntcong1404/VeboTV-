@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import { useState, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PuffLoader from "react-spinners/PuffLoader";
 
 import * as Service from "../../apiService/Service";
 import styles from "./League.module.scss";
@@ -23,6 +24,7 @@ function League() {
   const [title, setTitle] = useState("featured");
   const [league, setLeague] = useState([]);
   const [leagueFeatured, setLeagueFeatured] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     Service.League({ id })
@@ -34,9 +36,11 @@ function League() {
       });
   }, [id]);
   useEffect(() => {
+    setLoading(true);
     Service.LeagueFeatured({ title, id })
       .then((res) => {
         setLeagueFeatured(res);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -129,13 +133,21 @@ function League() {
               )}
             </div>
             <div className={cx("mf-content")}>
-              {title === "featured"
-                ? leagueFeatured?.map((data) => (
-                    <BoxMatch large key={data.id} data={data} />
-                  ))
-                : leagueFeatured?.map((data) => (
-                    <BoxLeague large key={data.id} data={data} />
-                  ))}
+              {loading ? (
+                <div className={cx("loading")}>
+                  <PuffLoader color="gray" size={60} speedMultiplier={1.5} />
+                </div>
+              ) : (
+                <>
+                  {title === "featured"
+                    ? leagueFeatured?.map((data) => (
+                        <BoxMatch large key={data.id} data={data} />
+                      ))
+                    : leagueFeatured?.map((data) => (
+                        <BoxLeague large key={data.id} data={data} />
+                      ))}
+                </>
+              )}
             </div>
           </div>
           <div className={cx("ads")}>

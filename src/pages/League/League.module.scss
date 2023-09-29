@@ -139,13 +139,14 @@
   .mf-content {
     display: flex;
     flex-wrap: wrap;
-    .mf-item {
-      flex: 0 0 50%;
-      max-width: 50%;
-    }
   }
 }
 .ads {
   flex: 0 0 33.33333%;
   max-width: 33.33333%;
+}
+
+.loading {
+  margin: auto;
+  padding: 10px 0;
 }

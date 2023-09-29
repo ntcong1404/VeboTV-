@@ -4,6 +4,7 @@ import * as dayjs from "dayjs";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { PuffLoader } from "react-spinners";
 
 import Update from "../../../hooks";
 import styles from "./LiveSchedule.module.scss";
@@ -104,7 +105,8 @@ function LiveSchedule() {
   const [liveScheduleTo, setLiveScheduleTo] = useState(active);
   const [liveScheduleResult, setLiveScheduleResult] = useState([]);
   const [live, setLive] = useState([]);
-  console.log(liveScheduleResult);
+  const [loading, setLoading] = useState(true);
+
   const handleLive = () => {
     setActive();
     setLiveScheduleResult(live);
@@ -128,12 +130,14 @@ function LiveSchedule() {
   }, [Update()]);
 
   useEffect(() => {
+    setLoading(true);
     Service.LiveScheduleDay({ to: liveScheduleTo })
       .then((data) => {
         const res = data.sort(
           (a, b) => b.tournament.priority - a.tournament.priority
         );
         setLiveScheduleResult(res);
+        setLoading(false);
       })
       .catch((error) => console.log(error));
   }, [liveScheduleTo]);
@@ -163,9 +167,17 @@ function LiveSchedule() {
         </div>
       </div>
       <div>
-        {liveScheduleResult.map((league) => (
-          <BoxLeague key={league.id} data={league} />
-        ))}
+        {loading ? (
+          <div className={cx("loading")}>
+            <PuffLoader color="gray" size={60} speedMultiplier={1.5} />
+          </div>
+        ) : (
+          <div>
+            {liveScheduleResult?.map((league) => (
+              <BoxLeague key={league.id} data={league} />
+            ))}
+          </div>
+        )}
       </div>
       <NavLink to={"/schedule"} className={cx("load-more")}>
         <FontAwesomeIcon icon={faArrowDown} className={cx("load-icon")} />
