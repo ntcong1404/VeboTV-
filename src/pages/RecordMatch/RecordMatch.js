@@ -49,6 +49,7 @@ function RecordMatch() {
                     className={cx("display-screen")}
                     url={data.video_url}
                     controls
+                    pip
                     width="100%"
                     height="100%"
                   />
@@ -57,6 +58,7 @@ function RecordMatch() {
                     className={cx("display-screen")}
                     url={data.video_url}
                     controls
+                    pip
                     width="100%"
                     height="100%"
                   />

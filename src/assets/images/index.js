@@ -1,5 +1,5 @@
 const images = {
-  logo: require("./logo.png"),
+  logo: require("./logo.gif"),
   background: require("./background.jpg"),
   backgroundImage: require("./icon-min1.png"),
   noImage: require("./no-image.png"),

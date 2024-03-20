@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import classNames from "classnames/bind";
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faArrowRight,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 import PuffLoader from "react-spinners/PuffLoader";
-
 import * as Service from "../../apiService/Service";
 import styles from "./Highlight.module.scss";
 import Bookmaker from "../../components/Bookmaker";
@@ -15,9 +18,27 @@ function Highlight() {
   const [highlight, setHighlight] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState("");
+  const [title, setTitle] = useState("");
 
   const handlePageClick = (data) => {
     setPage(data.selected + 1);
+  };
+  const handleChange = (e) => {
+    const searchValue = e.target.value.trim();
+    setSearchValue(searchValue);
+  };
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setHighlight([]);
+    Service.SearchHighLight({ q: searchValue })
+      .then((data) => {
+        setHighlight(data);
+        setLoading(false);
+        setTitle(searchValue);
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -37,8 +58,21 @@ function Highlight() {
   return (
     <div className={cx("wrapper")}>
       <div className={cx("header")}>
+        <form className={cx("search")} onSubmit={handleSearch}>
+          <input
+            required
+            type="text"
+            placeholder="Tìm kiếm highlights..."
+            className={cx("search-input")}
+            onChange={handleChange}
+          />
+          <button className={cx("search-btn")}>
+            <FontAwesomeIcon className={cx("icon")} icon={faSearch} />
+          </button>
+        </form>
+
         <div className={cx("title")}>
-          <h2>TỔNG HỢP HIGHLIGHT BÓNG ĐÁ 90PHUT TV</h2>
+          <h2>TỔNG HỢP HIGHLIGHT {title}</h2>
         </div>
       </div>
 
