@@ -122,6 +122,14 @@ export const SearchHighLight = async ({ q }) => {
     console.log(error);
   }
 };
+export const SearchReplay = async ({ q }) => {
+  try {
+    const res = await request.get(`news/vebotv/search/xemlai/${q}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const Replay = async ({ page }) => {
   try {

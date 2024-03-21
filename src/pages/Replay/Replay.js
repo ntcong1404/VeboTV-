@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import classNames from "classnames/bind";
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faArrowRight,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 import PuffLoader from "react-spinners/PuffLoader";
 
 import * as Service from "../../apiService/Service";
@@ -15,9 +19,27 @@ function Replay() {
   const [replay, setReplay] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState("");
+  const [title, setTitle] = useState("");
 
   const handlePageClick = (data) => {
     setPage(data.selected + 1);
+  };
+  const handleChange = (e) => {
+    const searchValue = e.target.value.trim();
+    setSearchValue(searchValue);
+  };
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setReplay([]);
+    Service.SearchReplay({ q: searchValue })
+      .then((data) => {
+        setReplay(data);
+        setLoading(false);
+        setTitle(searchValue);
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -37,8 +59,20 @@ function Replay() {
   return (
     <div className={cx("wrapper")}>
       <div className={cx("header")}>
+        <form className={cx("search")} onSubmit={handleSearch}>
+          <input
+            required
+            type="text"
+            placeholder="Tìm kiếm highlights..."
+            className={cx("search-input")}
+            onChange={handleChange}
+          />
+          <button className={cx("search-btn")}>
+            <FontAwesomeIcon className={cx("icon")} icon={faSearch} />
+          </button>
+        </form>
         <div className={cx("title")}>
-          <h2>XEM LẠI NHỮNG TRẬN ĐẤU ĐỈNH CAO NHẤT TRÊN 90PHUT TV</h2>
+          <h2>XEM LẠI TRẬN ĐẤU {title}</h2>
         </div>
       </div>
 
